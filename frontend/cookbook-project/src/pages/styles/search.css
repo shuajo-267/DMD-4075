@@ -1,0 +1,77 @@
+/*====================| IMPORTS |====================|*/
+
+/*| LATO |*/ @import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/*| JOST |*/ @import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/*| CAL SANS|*/ @import url('https://fonts.googleapis.com/css2?family=Cal+Sans&');
+/* BASKERVVILLE */ @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700');
+
+/*^^^^^^^^^^^^^^^^^^^^| IMPORTS |^^^^^^^^^^^^^^^^^^^^|*/
+
+@media (min-width: 768px) {
+
+    #mainContent {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    #liTitleFav {
+        margin-bottom: 15px; 
+    }
+
+    #searchItem {
+        font-size: 25px;
+    }
+}
+
+#searchHeader {
+    font-family: Baskervville;
+}
+
+#itemWrapper {
+    gap: 40px;
+    align-items: center;
+}
+
+#searchItem {
+    font-family: Cal Sans;
+}
+
+#favorite {
+    width: 20px;
+    height: auto;
+}
+
+#favorite:hover {
+    cursor: pointer;
+}
+
+#heartOutline:hover {
+    color: red;
+;}
+
+#liTitleFav {
+    display: flex;
+    gap: 10px;
+}
+
+.viewBtn {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(217, 52, 2, 0.85);
+    cursor: pointer;
+    font-family: Cal Sans;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+#viewRecipe:hover {
+    background: rgba(170, 42, 4, 0.85);
+}
+
+svg:hover {
+    cursor: pointer;
+}

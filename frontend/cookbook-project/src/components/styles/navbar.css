@@ -1,0 +1,66 @@
+/*====================| IMPORTS |====================|*/
+
+/*| LATO |*/ @import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/*| JOST |*/ @import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/*| CAL SANS|*/ @import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Jersey+10&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+/*^^^^^^^^^^^^^^^^^^^^| IMPORTS |^^^^^^^^^^^^^^^^^^^^|*/
+
+/*====================| MOBILE FIRST DESIGN |====================*/
+
+@media (min-width: 768px) {
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: black;
+        border: none;
+    }
+    
+    #page-list {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+    }
+    
+    #site-title {
+        font-family: Cal Sans;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 40px;
+        color: white;
+    }
+
+    #search-bar {
+        border-radius: 50px;
+        background: #FFF;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-family: Jost;
+        min-width: 200px;
+    }
+}
+
+/*^^^^^^^^^^^^^^^^^^^^| MOBILE FIRST DESIGN |^^^^^^^^^^^^^^^^^^^^*/
+
+
+/*vvvvvvvvvvvvvvvvvvvv| MOBILE FIRST DESIGN |vvvvvvvvvvvvvvvvvvvv*/
+
+#site-title {
+    font-family: Cal Sans;
+}
+
+#site-title a {
+    text-decoration: none;
+    color: white;
+}
+
+#page-list a {
+    font-family: Jost;
+    font-style: none;
+    text-decoration: none;
+    color: white;
+}

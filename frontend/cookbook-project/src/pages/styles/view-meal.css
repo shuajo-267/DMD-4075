@@ -1,0 +1,47 @@
+/*====================| IMPORTS |====================|*/
+
+/*| LATO |*/ @import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/*| JOST |*/ @import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/*| CAL SANS|*/ @import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Jersey+10&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+/*^^^^^^^^^^^^^^^^^^^^| IMPORTS |^^^^^^^^^^^^^^^^^^^^|*/
+
+@media(min-width: 768px) {
+
+    #viewMealWrapper {
+        display: flex;
+        justify-self: center;
+        margin-top: 40px;
+        gap: 80px;
+    }
+
+    #mealImg {
+        max-width: 500px;
+        width: 100%;
+        max-height: 500px;
+    }
+
+    #listInfoWrapper {
+        display: flex;
+        gap: 40px;
+    }
+
+    #instrWrapper {
+        max-width: 500px;
+    }
+
+}
+
+#mealInfo h1 {
+    font-family: "Cal Sans";
+    font-weight: 500;
+}
+
+#mealInfo h2 {
+    font-family: "Baskervville";
+    color: #8E1818;    
+}
+
+#mealInfo li, p {
+    font-family: Jost;
+}
