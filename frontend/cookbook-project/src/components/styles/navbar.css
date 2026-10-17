@@ -49,6 +49,14 @@
 
 /*vvvvvvvvvvvvvvvvvvvv| MOBILE FIRST DESIGN |vvvvvvvvvvvvvvvvvvvv*/
 
+#navWrapper {
+    position: relative;
+}
+
+nav {
+    width: 100%;
+}
+
 #site-title {
     font-family: Cal Sans;
 }
@@ -63,4 +71,11 @@
     font-style: none;
     text-decoration: none;
     color: white;
+}
+
+#pfp {
+    width: 50px;
+    height: auto;
+    border-radius: 80px;
+    border: 2px solid white;
 }

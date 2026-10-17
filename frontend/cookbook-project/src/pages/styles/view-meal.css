@@ -21,6 +21,12 @@
         max-height: 500px;
     }
 
+    #nameAndFav {
+        display: flex;
+        align-items: center;
+        gap: 5%;
+    }
+
     #listInfoWrapper {
         display: flex;
         gap: 40px;

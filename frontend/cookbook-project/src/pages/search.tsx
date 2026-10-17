@@ -76,7 +76,7 @@ function SearchPage() {
     event.preventDefault();
     try {
       const button: HTMLButtonElement = event.currentTarget;
-      const mealId = button.id.slice(10,15);
+      const mealId = button.id.slice(10, 15);
       navigate("/view-recipe", { state: mealId });
     } catch (error) {
       console.error("ERROR:", error);
@@ -154,7 +154,11 @@ function SearchPage() {
                           </defs>
                         </svg>
                       </div>
-                      <button id={`viewRecipe${meal.idMeal}`} className="viewBtn" onClick={viewRecipe}>
+                      <button
+                        id={`viewRecipe${meal.idMeal}`}
+                        className="viewBtn"
+                        onClick={viewRecipe}
+                      >
                         View Recipe
                       </button>
                     </div>

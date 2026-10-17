@@ -1,0 +1,29 @@
+/*====================| IMPORTS |====================|*/
+
+/*| LATO |*/ @import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/*| JOST |*/ @import url('https://fonts.googleapis.com/css2?family=Jersey+10&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/*| CAL SANS|*/ @import url('https://fonts.googleapis.com/css2?family=Cal+Sans&');
+/* BASKERVVILLE */ @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital,wght@0,400..700;1,400..700');
+
+/*^^^^^^^^^^^^^^^^^^^^| IMPORTS |^^^^^^^^^^^^^^^^^^^^|*/
+
+@media (min-width: 768px) {
+    
+    #categoryThumb {
+        max-width: 250px;
+        width: 100%;
+        height: auto;
+    }
+
+}
+
+#categoryCardWrapper div {
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+}
+
+.mealName {
+    font-family: Baskervville;
+    color: #8E1818;
+}
