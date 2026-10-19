@@ -1,0 +1,50 @@
+@media(min-width: 768px) {
+
+    #main-form-container {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        justify-self: center;
+    }
+
+    #description-field {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 800px;
+    }
+}
+
+#post-recipe-header {
+    font-family: Baskervville;
+}
+
+
+
+#recipe-name-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-select {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-header {
+    font-family: Baskervville;
+    color: #8E1818;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.check-label {
+    font-family: Jost;
+    width: 100%;
+    max-width: 300px;
+}

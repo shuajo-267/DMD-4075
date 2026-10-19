@@ -10,6 +10,7 @@ import AboutUs from "./pages/about";
 import ViewRecipe from "./pages/view-recipe";
 import ProfilePage from "./pages/profile";
 import ViewCategory from "./pages/view-category";
+import NewPost from "./pages/new-post";
 //^^^^^^^^^^^^^^^^^^^^| PAGES |^^^^^^^^^^^^^^^^^^^^//
 
 //vvvvvvvvvvvvvvvvvvvv| COMPONENTS |vvvvvvvvvvvvvvvvvvvv//
@@ -28,6 +29,7 @@ import "./pages/styles/view-meal.css";
 import "./pages/styles/profile.css";
 import "./pages/styles/home.css";
 import "./pages/styles/view-categories.css"
+import "./pages/styles/new-post.css"
 //^^^^^^^^^^^^^^^^^^^^| STYLES |^^^^^^^^^^^^^^^^^^^^//
 
 function AppLayout() {
@@ -43,6 +45,7 @@ function AppLayout() {
           <Route path="/view-recipe" element={<ViewRecipe />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/view-category" element={<ViewCategory />} />
+          <Route path="/new-post" element={<NewPost />} />
         </Routes>
       </main>
     </>

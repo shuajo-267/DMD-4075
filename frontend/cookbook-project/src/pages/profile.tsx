@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/navbar";
 import MealCard from "../components/mealcard";
 
@@ -69,6 +69,7 @@ interface MealData {
 }
 
 function ProfilePage() {
+  const [favsToDisplay, setFavsToDisplay] = useState<MealArr[]>([]);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -90,8 +91,8 @@ function ProfilePage() {
   }, []);
 
   useEffect(() => {
-    console.log("STORAGE:", localStorage);
-    console.log("FAV MEALS:", favMeals);
+    // console.log("STORAGE:", localStorage);
+    // console.log("FAV MEALS:", favMeals);
     const promises = favMeals.map(async (meal) => {
       const url = new URL(
         `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal}`,
@@ -107,9 +108,6 @@ function ProfilePage() {
 
           const meals = (await response.json()) as MealArr;
 
-          // favMealArr.push(meals);
-          // setFavMealList(favMealArr);
-
           return meals;
         } catch (err) {
           console.log("ERROR:", err);
@@ -121,10 +119,26 @@ function ProfilePage() {
       return promiseResult;
     });
 
-    const results = Promise.all(promises);
+    Promise.all(promises).then((result) => {
+      if (result !== undefined) {
+        const filteredResult = result.filter((meal): meal is MealArr => typeof meal !== undefined);
+        setFavsToDisplay(filteredResult)
+      }
+    })
 
     // setFavMealList(results);
+    console.log("Favs to display:", favsToDisplay);
   }, [favMeals]);
+
+  const PostRecipe = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault();
+    try {
+      const button: HTMLButtonElement = event.currentTarget;
+      navigate("/new-post");
+    } catch (error) {
+      console.error("ERROR:", error);
+    }
+  };
 
   return (
     <div>
@@ -136,9 +150,9 @@ function ProfilePage() {
         <div id="favorites">
           <h2>Favorite meals</h2>
           <div id="favRow">
-            {favMealList.map((meal: MealArr) => {
+            {favsToDisplay.map((meal: MealArr) => {
               const mealInfo = meal.meals[0];
-              //console.log("MEAL:", mealInfo.strMeal);
+              console.log("MEAL:", mealInfo);
               return (
                 <div>
                   <MealCard
@@ -151,6 +165,7 @@ function ProfilePage() {
             })}
           </div>
         </div>
+        <button onClick={PostRecipe}>Post New Recipe</button>
       </main>
     </div>
   );
