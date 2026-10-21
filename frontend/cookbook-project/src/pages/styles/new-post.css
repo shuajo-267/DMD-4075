@@ -1,5 +1,10 @@
 @media(min-width: 768px) {
 
+    #post-recipe-main {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+
     #main-form-container {
         width: 100%;
         max-width: 1200px;
@@ -8,11 +13,55 @@
         justify-self: center;
     }
 
-    #description-field {
+    #recipe-name-container {
         display: flex;
         flex-direction: column;
         width: 100%;
-        max-width: 800px;
+    }
+
+    #desc-field {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .checkbox-form {
+        margin-top: 30px;
+    }
+
+    .form-header {
+        font-size: 25px;
+    }
+
+    .form-select {
+        display: grid;
+        width: 100%;
+        max-width: 1200px;
+        grid-template-columns: 150px 150px 150px 150px;
+        justify-content: space-evenly;
+        margin-top: 40px;
+    }
+
+    .check-label {
+        font-size: 18px;
+        padding: 5px;
+    }
+
+    #recipe-name-input {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    #desc-input {
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 40px;
+    }
+
+    #submit-container {
+        display: flex;
+        justify-content: flex-end;
     }
 }
 
@@ -20,31 +69,101 @@
     font-family: Baskervville;
 }
 
-
-
-#recipe-name-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
-}
-
-.form-select {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
-}
-
 .form-header {
     font-family: Baskervville;
     color: #8E1818;
-    font-size: 20px;
     font-weight: 700;
+    margin-bottom: 20px;
 }
 
 .check-label {
     font-family: Jost;
     width: 100%;
-    max-width: 300px;
+    max-width: 200px;
+    max-height: 50px;
+    background: #8E1818;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s ease-in-out;
+}
+
+.check-label:hover {
+    background: #D93402;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: .3s ease-in-out;
+}
+
+.post-checkbox {
+    display: none;
+}
+
+#recipe-name-input {
+    font-family: Jost;
+    font-size: 16px;
+}
+
+#ingredient-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+#ingredient-btn {
+    width: 100%;
+    max-width: 200px;
+}
+
+#add-ing-row {
+    display: flex;
+    gap: 20px;
+    font-size: 20px;
+    align-items: center;
+}
+
+#add-ing-row:hover {
+    cursor: pointer;
+    color: #8E1818;
+}
+
+#add-icon {
+    width: 40px;
+}
+
+#desc-input {
+    font-family: Jost;
+    font-size: 16px;
+}
+
+#submit-btn {
+    font-family: Jost;
+    width: 100%;
+    max-width: 150px;
+    max-height: 50px;
+    background: #8E1818;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s ease-in-out;
+}
+
+#submit-btn:hover {
+    background: #D93402;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: .3s ease-in-out;
 }
