@@ -1,23 +1,50 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import type { ChangeEvent } from "react";
 import Navbar from "../components/navbar";
 
-const ingredientList = [];
-
-const addIngredient = () => {
-  const [newIngredient, setNewIngredient] = useState<HTMLInputElement>();
-
-  return (
-    <div>
-      <input type="text" placeholder="Enter an ingredient" />
-    </div>
-  );
-};
+interface Ingredient {
+  id: number,
+  name: string
+}
 
 function NewPost() {
+  const [ingredients, setIngredients] = useState<Array<Ingredient>>([]);
+  const [ingrInput, setIngrInput] = useState("");
+  const [ingrQuantity, setIngrQuantity] = useState("");
+  const [ingrMeasure, setIngrMeasure] = useState("");
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const ingrVal = event.target.value;
+    setIngrInput(ingrVal);
+  }
+
+  const handleQuantity = (event: ChangeEvent<HTMLInputElement>) => {
+    const quantity = event.target.value;
+    console.log(quantity);
+    setIngrQuantity(quantity);
+  }
+
+  const handleMeasurement = (event: ChangeEvent<HTMLSelectElement>) => {
+    const measure = event.target.value;
+    console.log(measure);
+    setIngrMeasure(measure);
+  }
+  
+  const addIngredient = () => {
+    const newIngredient: Ingredient = {
+      id: Math.random(),
+      name: ingrInput
+    }
+    setIngredients([...ingredients, newIngredient])
+    setIngrInput("");
+    setIngrQuantity("");
+    setIngrMeasure("");
+  };
+
   return (
     <div>
-      <Navbar />
+      <Navbar/>
       <main id="post-recipe-main">
         <h1 id="post-recipe-header">Post a recipe</h1>
         <div id="main-form-container">
@@ -234,10 +261,32 @@ function NewPost() {
             <label htmlFor="ingredient-list" className="form-header">
               Ingredients
             </label>
-            <ul>
-              <li>
-                <input type="text" placeholder="Please enter an ingredient" />
-              </li>
+            <input type="text" placeholder="Please enter an ingredient" id="ingredient-input" onChange={handleInputChange} value={ingrInput}/>
+            <input type="number" placeholder="Please enter a measurement quantity" id="ingredient-quantity" onChange={handleQuantity}/>
+            <select name="measurement" id="measure-select" required onChange={handleMeasurement}>
+              <option value="">Select measurement:</option>
+              <option value="fl-oz">fl oz</option>
+              <option value="tsp">tsp</option>
+              <option value="tbsp">tbsp</option>
+              <option value="cup">cup(s)</option>
+              <option value="pt">pt(s)</option>
+              <option value="qt">qt(s)</option>
+              <option value="gal">gal</option>
+              <option value="oz">oz</option>
+              <option value="lb">lb</option>
+              <option value="g">g</option>
+              <option value="kg">kg</option>
+              <option value="ml">ml</option>
+              <option value="L">L</option>
+            </select>   
+            <ul id="ingredient-list">
+              {ingredients.map((ingredient: Ingredient) => {
+                return (
+                  <div>
+                    <li key={ingredient.id}>{ingredient.name} - {ingrQuantity} {ingrMeasure}</li>
+                  </div>
+                )
+              })}
             </ul>
             <div id="add-ing-row" onClick={addIngredient}>
               <svg

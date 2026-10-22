@@ -123,7 +123,7 @@
 
 #add-ing-row {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     font-size: 20px;
     align-items: center;
 }
@@ -133,8 +133,12 @@
     color: #8E1818;
 }
 
+#add-ing-row:hover path {
+    stroke: #8E1818;
+}
+
 #add-icon {
-    width: 40px;
+    width: 30px;
 }
 
 #desc-input {
