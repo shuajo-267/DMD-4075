@@ -53,6 +53,11 @@
         border-radius: 10px;
     }
 
+    .ingredient-inputs {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
     #desc-input {
         padding: 15px;
         border-radius: 10px;
@@ -74,6 +79,10 @@
     color: #8E1818;
     font-weight: 700;
     margin-bottom: 20px;
+}
+
+.checkbox-form {
+    margin-bottom: 40px;
 }
 
 .check-label {
@@ -111,9 +120,23 @@
     font-size: 16px;
 }
 
-#ingredient-inputs {
+#ingredient-form {
     display: flex;
     flex-direction: column;
+}
+
+.ingredient-inputs {
+    font-size: 16px;
+    font-family: Jost;
+}
+
+#ingredient-list {
+    font-family: Jost;
+    font-size: 16px;
+}
+
+.ingredient-li {
+    margin-bottom: 10px;
 }
 
 #ingredient-btn {

@@ -5,7 +5,9 @@ import Navbar from "../components/navbar";
 
 interface Ingredient {
   id: number,
-  name: string
+  name: string,
+  quantity: number,
+  measure: string
 }
 
 function NewPost() {
@@ -13,33 +15,42 @@ function NewPost() {
   const [ingrInput, setIngrInput] = useState("");
   const [ingrQuantity, setIngrQuantity] = useState("");
   const [ingrMeasure, setIngrMeasure] = useState("");
+  const ingredientLi: HTMLLIElement | null = document.querySelector(".ingredient-li");
+
+  if (ingredientLi !== null) {
+    ingredientLi.addEventListener("mouseover", () => {
+
+    })
+  }
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const ingrVal = event.target.value;
-    setIngrInput(ingrVal);
+    if (ingrVal.includes("0") || ingrVal.includes("1") || ingrVal.includes("2") || ingrVal.includes("3") || ingrVal.includes("4") || ingrVal.includes("5") || ingrVal.includes("6") || ingrVal.includes("7") || ingrVal.includes("8") || ingrVal.includes("9")) {
+      alert("Please enter a number");
+    } else {
+      setIngrInput(ingrVal);
+    }
   }
 
   const handleQuantity = (event: ChangeEvent<HTMLInputElement>) => {
     const quantity = event.target.value;
-    console.log(quantity);
     setIngrQuantity(quantity);
   }
 
   const handleMeasurement = (event: ChangeEvent<HTMLSelectElement>) => {
     const measure = event.target.value;
-    console.log(measure);
     setIngrMeasure(measure);
   }
   
   const addIngredient = () => {
     const newIngredient: Ingredient = {
       id: Math.random(),
-      name: ingrInput
-    }
-    setIngredients([...ingredients, newIngredient])
+      name: ingrInput,
+      quantity: Number(ingrQuantity),
+      measure: ingrMeasure
+    };
+    setIngredients([...ingredients, newIngredient]);
     setIngrInput("");
-    setIngrQuantity("");
-    setIngrMeasure("");
   };
 
   return (
@@ -257,13 +268,13 @@ function NewPost() {
               </div>
             </div>
           </div>
-          <div id="ingredient-inputs">
+          <div id="ingredient-form">
             <label htmlFor="ingredient-list" className="form-header">
               Ingredients
             </label>
-            <input type="text" placeholder="Please enter an ingredient" id="ingredient-input" onChange={handleInputChange} value={ingrInput}/>
-            <input type="number" placeholder="Please enter a measurement quantity" id="ingredient-quantity" onChange={handleQuantity}/>
-            <select name="measurement" id="measure-select" required onChange={handleMeasurement}>
+            <input type="text" placeholder="Please enter an ingredient" id="ingredient-input" onChange={handleInputChange} value={ingrInput} className="ingredient-inputs"/>
+            <input type="number" placeholder="Please enter a measurement quantity" id="ingredient-quantity" onChange={handleQuantity} className="ingredient-inputs"/>
+            <select name="measurement" id="measure-select" required onChange={handleMeasurement} className="ingredient-inputs">
               <option value="">Select measurement:</option>
               <option value="fl-oz">fl oz</option>
               <option value="tsp">tsp</option>
@@ -283,7 +294,19 @@ function NewPost() {
               {ingredients.map((ingredient: Ingredient) => {
                 return (
                   <div>
-                    <li key={ingredient.id}>{ingredient.name} - {ingrQuantity} {ingrMeasure}</li>
+                    <li key={ingredient.id} className="ingredient-li">{ingredient.name} - {ingredient.quantity} {ingredient.measure}</li>
+                    <svg width="104" height="107" viewBox="0 0 104 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="86.0303" width="24" height="95" transform="rotate(43.1998 86.0303 0)" fill="black"/>
+                      <path d="M7.77749 98.9411L20.6636 72.5828L34.1358 86.0549L7.77749 98.9411Z" fill="black"/>
+                    </svg>
+                    <svg width="81" height="147" viewBox="0 0 81 147" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect y="36" width="81" height="111" fill="black"/>
+                      <rect y="13" width="81" height="16" fill="black"/>
+                      <path d="M17 0H64V13L40.5 0L17 13V0Z" fill="black"/>
+                      <rect x="13" y="60" width="8" height="63" fill="white"/>
+                      <rect x="37" y="60" width="8" height="63" fill="white"/>
+                      <rect x="61" y="60" width="8" height="63" fill="white"/>
+                    </svg>
                   </div>
                 )
               })}
