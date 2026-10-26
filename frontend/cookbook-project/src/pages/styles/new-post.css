@@ -58,6 +58,20 @@
         margin-bottom: 15px;
     }
 
+    .added-ingredient {
+        display: flex;
+        gap: 10px;
+    }
+
+    .ingredient-icon {
+        width: 25px;
+        height: auto;
+    }
+
+    #trash-icon {
+        width: 15px;
+    }
+
     #desc-input {
         padding: 15px;
         border-radius: 10px;
@@ -120,6 +134,8 @@
     font-size: 16px;
 }
 
+/*=========================================INGREDIENT ICONS*/
+
 #ingredient-form {
     display: flex;
     flex-direction: column;
@@ -135,7 +151,11 @@
     font-size: 16px;
 }
 
-.ingredient-li {
+.ingredient-icon rect path {
+    fill: #8E1818;
+}
+
+.added-ingredient {
     margin-bottom: 10px;
 }
 
@@ -163,6 +183,8 @@
 #add-icon {
     width: 30px;
 }
+
+/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 
 #desc-input {
     font-family: Jost;
