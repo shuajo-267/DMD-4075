@@ -151,12 +151,20 @@
     font-size: 16px;
 }
 
-.ingredient-icon rect path {
+.added-ingredient {
+    margin-bottom: 10px;
+}
+
+#edit-icon:hover rect {
     fill: #8E1818;
 }
 
-.added-ingredient {
-    margin-bottom: 10px;
+#edit-icon:hover path {
+    fill: #8E1818;
+}
+
+#trash-icon:hover .trash-svg {
+    fill: #8E1818;
 }
 
 #ingredient-btn {

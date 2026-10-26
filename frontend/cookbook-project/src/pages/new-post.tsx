@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import type { ChangeEvent } from "react";
 import Navbar from "../components/navbar";
+import PostBtn from "../components/postBtn";
 
 interface Ingredient {
   id: number,
   name: string,
   quantity: number,
-  measure: string
+  measure: string,
+  isEditing: boolean
 }
 
 function NewPost() {
@@ -47,10 +49,19 @@ function NewPost() {
       id: Math.random(),
       name: ingrInput,
       quantity: Number(ingrQuantity),
-      measure: ingrMeasure
+      measure: ingrMeasure,
+      isEditing: false
     };
     setIngredients([...ingredients, newIngredient]);
     setIngrInput("");
+  };
+
+  const editIngredient = (id: number) => {
+    setIngredients(ingredients.map(ingredient => ingredient.id === id ? {...ingredient, isEditing: !ingredient.isEditing} : ingredient))
+  }
+
+  const deleteIngredient = (id: number) => {
+    setIngredients(ingredients.filter(ingredient => ingredient.id !== id))
   };
 
   return (
@@ -77,6 +88,7 @@ function NewPost() {
                   Allergens
                 </label>
                 <form className="form-select" name="allergens">
+                  <PostBtn name="hello" isClicked={false}/>
                   <label className="check-label">
                     <input
                       value="peanuts"
@@ -295,18 +307,22 @@ function NewPost() {
                 return (
                   <div className="added-ingredient">
                     <li key={ingredient.id} className="ingredient-li">{ingredient.name} - {ingredient.quantity} {ingredient.measure}</li>
-                    <svg width="104" height="107" viewBox="0 0 104 107" fill="none" xmlns="http://www.w3.org/2000/svg" className="ingredient-icon">
-                      <rect x="86.0303" width="24" height="95" transform="rotate(43.1998 86.0303 0)" fill="black"/>
-                      <path d="M7.77749 98.9411L20.6636 72.5828L34.1358 86.0549L7.77749 98.9411Z" fill="black"/>
-                    </svg>
-                    <svg width="81" height="147" viewBox="0 0 81 147" fill="none" xmlns="http://www.w3.org/2000/svg" className="ingredient-icon" id="trash-icon">
-                      <rect y="36" width="81" height="111" fill="black"/>
-                      <rect y="13" width="81" height="16" fill="black"/>
-                      <path d="M17 0H64V13L40.5 0L17 13V0Z" fill="black"/>
-                      <rect x="13" y="60" width="8" height="63" fill="white"/>
-                      <rect x="37" y="60" width="8" height="63" fill="white"/>
-                      <rect x="61" y="60" width="8" height="63" fill="white"/>
-                    </svg>
+                    <div title="Edit ingredient">
+                      <svg width="104" height="107" viewBox="0 0 104 107" fill="none" xmlns="http://www.w3.org/2000/svg" className="ingredient-icon" id="edit-icon">
+                        <rect x="86.0303" width="24" height="95" transform="rotate(43.1998 86.0303 0)" fill="black"/>
+                        <path d="M7.77749 98.9411L20.6636 72.5828L34.1358 86.0549L7.77749 98.9411Z" fill="black"/>
+                      </svg>
+                    </div>
+                    <div title="Delete ingredient" onClick={() => deleteIngredient(ingredient.id)}>
+                      <svg width="81" height="147" viewBox="0 0 81 147" fill="none" xmlns="http://www.w3.org/2000/svg" className="ingredient-icon" id="trash-icon">
+                        <rect y="36" width="81" height="111" fill="black" className="trash-svg"/>
+                        <rect y="13" width="81" height="16" fill="black" className="trash-svg"/>
+                        <path d="M17 0H64V13L40.5 0L17 13V0Z" fill="black" className="trash-svg"/>
+                        <rect x="13" y="60" width="8" height="63" fill="white"/>
+                        <rect x="37" y="60" width="8" height="63" fill="white"/>
+                        <rect x="61" y="60" width="8" height="63" fill="white"/>
+                      </svg>
+                    </div>
                   </div>
                 )
               })}
