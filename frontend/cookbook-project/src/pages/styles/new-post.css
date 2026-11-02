@@ -53,7 +53,7 @@
         border-radius: 10px;
     }
 
-    .ingredient-inputs {
+    .ingredient-inputs, .instruction-inputs {
         padding: 10px;
         margin-bottom: 15px;
     }
@@ -81,6 +81,11 @@
     #submit-container {
         display: flex;
         justify-content: flex-end;
+    }
+
+    /*SECTIONS*/
+    .form-section {
+        margin-bottom: 5em;
     }
 }
 
@@ -136,17 +141,17 @@
 
 /*=========================================INGREDIENT ICONS*/
 
-#ingredient-form {
+.form-list {
     display: flex;
     flex-direction: column;
 }
 
-.ingredient-inputs {
+.ingredient-inputs, .instruction-inputs {
     font-size: 16px;
     font-family: Jost;
 }
 
-#ingredient-list {
+#ingredient-list, #instruction-list {
     font-family: Jost;
     font-size: 16px;
 }
