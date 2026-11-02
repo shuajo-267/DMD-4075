@@ -11,6 +11,7 @@ class RecipeModel(db.Model):
     instructions = db.Column(db.JSON, nullable = False)
     allergens = db.Column(db.JSON)
     dietary_tags = db.Column(db.JSON)
+    description = db.Column(db.String(500))
     author_id = db.Column(db.Integer, nullable = False)
     author_username = db.Column(db.String(80), nullable = False)
 
@@ -23,6 +24,7 @@ recipe_args.add_argument("ingredients", type = list, required = True, help = "In
 recipe_args.add_argument("instructions", type = list, required = True, help = "Instructions cannot be blank")
 recipe_args.add_argument("allergens", type = list, required = False)
 recipe_args.add_argument("dietary_tags", type = list, required = False)
+recipe_args.add_argument("description", type = str, required = False)
 recipe_args.add_argument("author_id", type = int, required = True, help = "Author ID cannot be blank")
 recipe_args.add_argument("author_username", type = str, required = True, help = "Author username cannot be blank")
 
@@ -30,8 +32,12 @@ recipeFields = {
     "id": fields.Integer,
     "recipe_name": fields.String,
     "ingredients": fields.List(fields.String),
+    "instructions": fields.List(fields.String),
     "allergens": fields.List(fields.String),
-    "dietary_tags": fields.List(fields.String)
+    "dietary_tags": fields.List(fields.String),
+    "description": fields.String,
+    "author_id": fields.Integer,
+    "author_username": fields.String
 }
 
 class Recipes(Resource):
