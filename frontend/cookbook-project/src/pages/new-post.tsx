@@ -9,6 +9,7 @@ import AllergensForm from "../components/allergens";
 import CategoryForm from "../components/category-form";
 import DescriptionField from "../components/description-field";
 import RecipeName from "../components/recipe-name";
+import FileUpload from "../components/file-upload";
 
 interface Instruction {
   id: number;
@@ -28,26 +29,40 @@ interface Allergen {
   name: string;
 }
 
+interface Category {
+  name: string;
+}
+
 function NewPost() {
   // POST VARIABLES
   const [recipeName, setRecipeName] = useState("");
   const [passedIngr, setPassedIngr] = useState<Ingredient[]>([]);
   const [passedInstr, setPassedInstr] = useState<Instruction[]>([]);
   const [passedAllergens, setPassedAllergens] = useState<Allergen[]>([]);
+  const [passedCategories, setPassedCategories] = useState<Category[]>([]);
+  const [file, setFile] = useState<File[]>([]);
   const [description, setDescription] = useState("");
 
-  //HANDLE INSTRUCTIONS
+  // TESTING
   useEffect(() => {
-    console.log("passed ingredients:", passedIngr);
+    console.log("Passed ingredients:", passedIngr);
   }, [passedIngr]);
 
   useEffect(() => {
-    console.log("passed instructions:", passedInstr);
+    console.log("Passed instructions:", passedInstr);
   }, [passedInstr]);
 
   useEffect(() => {
     console.log("Recipe name:", recipeName);
   }, [recipeName]);
+
+  useEffect(() => {
+    console.log("Passed allergens:", passedAllergens);
+  }, [passedAllergens]);
+
+  useEffect(() => {
+    console.log("Passed categories:", passedCategories);
+  }, [passedCategories]);
 
   useEffect(() => {
     console.log("Description:", description);
@@ -91,7 +106,7 @@ function NewPost() {
                 />
               </section>
               <section className="form-section">
-                <CategoryForm />
+                <CategoryForm passedCategories={passedCategories} setPassedCategories={setPassedCategories}/>
               </section>
             </div>
           </div>
@@ -106,6 +121,9 @@ function NewPost() {
               passedInstr={passedInstr}
               setPassedInstr={setPassedInstr}
             />
+          </section>
+          <section className="form-section">
+            <FileUpload file={file} setFile={setFile}/>
           </section>
           <section className="form-section">
             <DescriptionField setDescription={setDescription} />

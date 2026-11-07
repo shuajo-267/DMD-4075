@@ -31,31 +31,31 @@ function AllergensForm({ passedAllergens, setPassedAllergens }: Props) {
           Peanuts
         </label>
         <label className="check-label">
-          <input value="tree-nuts" type="checkbox" className="post-checkbox" />
+          <input value="tree-nuts" type="checkbox" className="post-checkbox" onClick={addAllergens}/>
           Tree Nuts
         </label>
         <label className="check-label">
-          <input value="fish" type="checkbox" className="post-checkbox" />
+          <input value="fish" type="checkbox" className="post-checkbox" onClick={addAllergens}/>
           Fish
         </label>
         <label className="check-label">
-          <input value="shellfish" type="checkbox" className="post-checkbox" />
+          <input value="shellfish" type="checkbox" className="post-checkbox" onClick={addAllergens}/>
           Shellfish
         </label>
         <label className="check-label">
-          <input value="wheat" type="checkbox" className="post-checkbox" />
+          <input value="wheat" type="checkbox" className="post-checkbox" onClick={addAllergens}/>
           Wheat
         </label>
         <label className="check-label">
-          <input value="soy" type="checkbox" className="post-checkbox" />
+          <input value="soy" type="checkbox" className="post-checkbox" onClick={addAllergens}/>
           Soy
         </label>
         <label className="check-label">
-          <input value="sesame" type="checkbox" className="post-checkbox" />
+          <input value="sesame" type="checkbox" className="post-checkbox" onClick={addAllergens}/>
           Sesame
         </label>
         <label className="check-label">
-          <input value="milk-dairy" type="checkbox" className="post-checkbox" />
+          <input value="milk-dairy" type="checkbox" className="post-checkbox" onClick={addAllergens}/>
           Milk/Dairy
         </label>
       </form>

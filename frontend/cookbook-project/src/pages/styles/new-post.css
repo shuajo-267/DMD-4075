@@ -199,6 +199,14 @@
 
 /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
 
+/*=========================================FILE UPLOAD*/
+#file-up-input {
+    margin-top: 30px;
+    font-family: Jost;
+    font-size: 16px;
+}
+/*=========================================FILE UPLOAD*/
+
 #desc-input {
     font-family: Jost;
     font-size: 16px;
