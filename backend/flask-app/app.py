@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Resource, Api, reqparse, fields, marshal_with, abort
 
@@ -6,6 +7,7 @@ from extensions import db
 from recipe import Recipe, Recipes
 
 app = Flask(__name__)
+CORS(app, resources = {r"/api/recipes": {"origins": "http://localhost:5173"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 api = Api(app)
 db.init_app(app)

@@ -10,19 +10,21 @@ class RecipeModel(db.Model):
     ingredients = db.Column(db.JSON, nullable = False)
     instructions = db.Column(db.JSON, nullable = False)
     allergens = db.Column(db.JSON)
+    categories = db.Column(db.JSON)
     dietary_tags = db.Column(db.JSON)
     description = db.Column(db.String(500))
     author_id = db.Column(db.Integer, nullable = False)
     author_username = db.Column(db.String(80), nullable = False)
 
     def __repr__(self):
-        return f"Recipe(recipe_name = {self.recipe_name}, ingredients = {self.ingredients}, instructions = {self.instructions}, allergens = {self.allergens}, dietary_tags = {self.dietary_tags})"
+        return f"Recipe(recipe_name = {self.recipe_name}, ingredients = {self.ingredients}, instructions = {self.instructions}, allergens = {self.allergens}, categories = {self.categories}, dietary_tags = {self.dietary_tags}, description = {self.description})"
 
 recipe_args = reqparse.RequestParser()
 recipe_args.add_argument("recipe_name", type = str, required = True, help = "Recipe name cannot be blank")
 recipe_args.add_argument("ingredients", type = list, required = True, help = "Ingredients cannot be blank")
 recipe_args.add_argument("instructions", type = list, required = True, help = "Instructions cannot be blank")
 recipe_args.add_argument("allergens", type = list, required = False)
+recipe_args.add_argument("categories", type = list, required = False)
 recipe_args.add_argument("dietary_tags", type = list, required = False)
 recipe_args.add_argument("description", type = str, required = False)
 recipe_args.add_argument("author_id", type = int, required = True, help = "Author ID cannot be blank")
@@ -31,10 +33,11 @@ recipe_args.add_argument("author_username", type = str, required = True, help = 
 recipeFields = {
     "id": fields.Integer,
     "recipe_name": fields.String,
-    "ingredients": fields.List(fields.String),
-    "instructions": fields.List(fields.String),
-    "allergens": fields.List(fields.String),
-    "dietary_tags": fields.List(fields.String),
+    "ingredients": fields.Raw,
+    "instructions": fields.Raw,
+    "allergens": fields.Raw,
+    "categories": fields.Raw,
+    "dietary_tags": fields.Raw,
     "description": fields.String,
     "author_id": fields.Integer,
     "author_username": fields.String
@@ -52,11 +55,10 @@ class Recipes(Resource):
         if not data:
             return {"error": "Invalid JSON"}, 400
         args = recipe_args.parse_args()
-        recipe = RecipeModel(recipe_name = args["recipe_name"], ingredients = data["ingredients"], instructions = data["instructions"], allergens = data["allergens"], dietary_tags = data["dietary_tags"], author_id = args["author_id"], author_username = args["author_username"])
+        recipe = RecipeModel(recipe_name = args["recipe_name"], ingredients = data["ingredients"], instructions = data["instructions"], allergens = data["allergens"], categories = data["categories"], dietary_tags = data["dietary_tags"], author_id = args["author_id"], author_username = args["author_username"])
         db.session.add(recipe)
         db.session.commit()
-        recipes = RecipeModel.query.all()
-        return recipes, 201
+        return recipe, 201
 
 class Recipe(Resource):
     @marshal_with(recipeFields)
