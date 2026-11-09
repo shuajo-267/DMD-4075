@@ -2,7 +2,7 @@ import type { Dispatch, SetStateAction, MouseEvent } from "react";
 
 interface Category {
     name: string;
-  }
+}
   
 interface Props {
   passedCategories: Category[];

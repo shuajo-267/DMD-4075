@@ -68,6 +68,47 @@ interface MealData {
   dateModified: string;
 }
 
+interface Ingredient {
+  id: number;
+  name: string;
+  quantity: number;
+  measure: string;
+}
+
+interface Instruction {
+  id: number;
+  name: string;
+}
+
+interface Allergen {
+  name: string;
+}
+
+interface Category {
+  name: string;
+}
+
+interface DietTag {
+  name: string;
+}
+
+interface UserPost {
+  id: number;
+  recipe_name: string;
+  ingredients: Ingredient[];
+  instructions: Instruction[];
+  allergens: Allergen[];
+  categories: Category[];
+  dietary_tags: DietTag[];
+  description: string;
+  author_id: number;
+  author_username: string;
+}
+
+interface UserPosts {
+  posts: UserPost[];
+}
+
 function ProfilePage() {
   const [favsToDisplay, setFavsToDisplay] = useState<MealArr[]>([]);
   const location = useLocation();
@@ -78,6 +119,7 @@ function ProfilePage() {
 
   const [favMeals, setFavMeals] = useState<string[]>([]);
   const [data, setData] = useState<MealArr>(initMealArr);
+  const [userPosts, setUserPosts] = useState();
 
   useEffect(() => {
     const retrievedMeals = localStorage.getItem("favs");
@@ -91,8 +133,6 @@ function ProfilePage() {
   }, []);
 
   useEffect(() => {
-    // console.log("STORAGE:", localStorage);
-    // console.log("FAV MEALS:", favMeals);
     const promises = favMeals.map(async (meal) => {
       const url = new URL(
         `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal}`,
@@ -110,7 +150,7 @@ function ProfilePage() {
 
           return meals;
         } catch (err) {
-          console.log("ERROR:", err);
+          console.error("ERROR:", err);
         }
       };
 
@@ -121,14 +161,35 @@ function ProfilePage() {
 
     Promise.all(promises).then((result) => {
       if (result !== undefined) {
-        const filteredResult = result.filter((meal): meal is MealArr => typeof meal !== undefined);
-        setFavsToDisplay(filteredResult)
+        const filteredResult = result.filter(
+          (meal): meal is MealArr => typeof meal !== undefined,
+        );
+        setFavsToDisplay(filteredResult);
       }
-    })
+    });
 
     // setFavMealList(results);
-    console.log("Favs to display:", favsToDisplay);
   }, [favMeals]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:5000/api/recipes");
+
+        if (!response.ok) {
+          throw new Error();
+        }
+
+        const posts = (await response.json()) as UserPost;
+        return posts;
+      } catch (err) {
+        console.error(err);
+      }
+
+      const promiseResult = await fetchPosts();
+      return promiseResult;
+    };
+  }, []);
 
   const PostRecipe = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
@@ -152,7 +213,6 @@ function ProfilePage() {
           <div id="favRow">
             {favsToDisplay.map((meal: MealArr) => {
               const mealInfo = meal.meals[0];
-              console.log("MEAL:", mealInfo);
               return (
                 <div>
                   <MealCard

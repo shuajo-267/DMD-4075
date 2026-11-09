@@ -10,11 +10,11 @@ import CategoryForm from "../components/category-form";
 import DescriptionField from "../components/description-field";
 import RecipeName from "../components/recipe-name";
 import FileUpload from "../components/file-upload";
+import DietaryTags from "../components/diet-tags";
 
 interface Instruction {
   id: number;
   name: string;
-  isEditing: boolean;
 }
 
 interface Ingredient {
@@ -22,7 +22,6 @@ interface Ingredient {
   name: string;
   quantity: number;
   measure: string;
-  isEditing: boolean;
 }
 
 interface Allergen {
@@ -33,14 +32,20 @@ interface Category {
   name: string;
 }
 
+interface DietTag {
+  name: string;
+}
+
 function NewPost() {
+  const navigate = useNavigate();
   // POST VARIABLES
   const [recipeName, setRecipeName] = useState("");
   const [passedIngr, setPassedIngr] = useState<Ingredient[]>([]);
   const [passedInstr, setPassedInstr] = useState<Instruction[]>([]);
   const [passedAllergens, setPassedAllergens] = useState<Allergen[]>([]);
   const [passedCategories, setPassedCategories] = useState<Category[]>([]);
-  const [file, setFile] = useState<File[]>([]);
+  const [passedTags, setPassedTags] = useState<DietTag[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const [description, setDescription] = useState("");
 
   // TESTING
@@ -65,28 +70,43 @@ function NewPost() {
   }, [passedCategories]);
 
   useEffect(() => {
+    console.log("Passed tags:", passedTags);
+  }, [passedTags]);
+
+  useEffect(() => {
+    console.log("Files:", files);
+  }, [files]);
+
+  useEffect(() => {
     console.log("Description:", description);
   }, [description]);
 
   //====================| POST RECIPE |====================
-  // const postRecipe = () => {
-  //   fetch("http://127.0.0.1:5000/api/recipes", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       recipe_name: recipeName,
-  //       ingredients: passedIngr,
-  //       instructions: passedInstr,
-  //       allergens: allergens,
-  //       dietary_tags: dietaryTags,
-  //       description: description,
-  //       author_id: 1,
-  //       author_username: "joshua_c",
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((json) => console.log(json))
-  //     .catch((err) => console.error(err));
-  // };
+  const postRecipe = () => {
+
+    fetch("http://127.0.0.1:5000/api/recipes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        recipe_name: recipeName,
+        ingredients: passedIngr,
+        instructions: passedInstr,
+        allergens: passedAllergens,
+        categories: passedCategories,
+        dietary_tags: passedTags,
+        description: description,
+        author_id: 1,
+        author_username: "joshua_c",
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json))
+      .catch((err) => console.error(err));
+
+      navigate("/profile");
+  };
   //^^^^^^^^^^^^^^^^^^^^| POST RECIPE |^^^^^^^^^^^^^^^^^^^^
   return (
     <div>
@@ -106,7 +126,16 @@ function NewPost() {
                 />
               </section>
               <section className="form-section">
-                <CategoryForm passedCategories={passedCategories} setPassedCategories={setPassedCategories}/>
+                <CategoryForm
+                  passedCategories={passedCategories}
+                  setPassedCategories={setPassedCategories}
+                />
+              </section>
+              <section>
+                <DietaryTags
+                  passedTags={passedTags}
+                  setPassedTags={setPassedTags}
+                />
               </section>
             </div>
           </div>
@@ -123,12 +152,12 @@ function NewPost() {
             />
           </section>
           <section className="form-section">
-            <FileUpload file={file} setFile={setFile}/>
+            <FileUpload setFiles={setFiles} />
           </section>
           <section className="form-section">
             <DescriptionField setDescription={setDescription} />
           </section>
-          <div id="submit-container">
+          <div id="submit-container" onClick={postRecipe}>
             <p id="submit-btn">Submit</p>
           </div>
         </div>

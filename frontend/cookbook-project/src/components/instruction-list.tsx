@@ -4,7 +4,6 @@ import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 interface Instruction {
   id: number;
   name: string;
-  isEditing: boolean;
 }
 
 interface Props {
@@ -40,8 +39,7 @@ function InstructionList({ passedInstr, setPassedInstr }: Props) {
       const addInstruction = () => {
         const newInstruction: Instruction = {
           id: Math.random(),
-          name: instrInput,
-          isEditing: false,
+          name: instrInput
         };
         setInstructions([...instructions, newInstruction]);
         setPassedInstr([...passedInstr, newInstruction]);
