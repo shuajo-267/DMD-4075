@@ -109,6 +109,10 @@ interface UserPosts {
   posts: UserPost[];
 }
 
+const initPosts = {
+  posts: []
+}
+
 function ProfilePage() {
   const [favsToDisplay, setFavsToDisplay] = useState<MealArr[]>([]);
   const location = useLocation();
@@ -119,7 +123,7 @@ function ProfilePage() {
 
   const [favMeals, setFavMeals] = useState<string[]>([]);
   const [data, setData] = useState<MealArr>(initMealArr);
-  const [userPosts, setUserPosts] = useState();
+  const [userPosts, setUserPosts] = useState<UserPosts>(initPosts);
 
   useEffect(() => {
     const retrievedMeals = localStorage.getItem("favs");
@@ -171,24 +175,25 @@ function ProfilePage() {
     // setFavMealList(results);
   }, [favMeals]);
 
+  // FETCH USER POSTS
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const response = await fetch("http://127.0.0.1:5000/api/recipes");
+        console.log("Response:", response);
 
-        if (!response.ok) {
-          throw new Error();
-        }
+        if (!response.ok) throw new Error();
 
-        const posts = (await response.json()) as UserPost;
-        return posts;
+        const posts = (await response.json())
+        console.log("User Posts:", posts);
+        setUserPosts(posts);
       } catch (err) {
         console.error(err);
       }
 
-      const promiseResult = await fetchPosts();
-      return promiseResult;
+
     };
+    fetchPosts();
   }, []);
 
   const PostRecipe = (event: React.MouseEvent<HTMLButtonElement>): void => {
