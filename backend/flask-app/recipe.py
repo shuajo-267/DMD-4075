@@ -1,5 +1,7 @@
 from flask import Flask, Blueprint, request
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship
+from sqlalchemy import ForeignKey
 from flask_restful import Resource, Api, reqparse, fields, marshal_with, abort
 from extensions import db
 
@@ -15,9 +17,21 @@ class RecipeModel(db.Model):
     description = db.Column(db.String(500))
     author_id = db.Column(db.Integer, nullable = False)
     author_username = db.Column(db.String(80), nullable = False)
+    images = relationship(
+        "RecipeImage", 
+        primaryjoin="RecipeModel.id == RecipeImage.recipe_id",
+        foreign_keys="[RecipeImage.recipe_id]"
+    )
 
     def __repr__(self):
         return f"Recipe(recipe_name = {self.recipe_name}, ingredients = {self.ingredients}, instructions = {self.instructions}, allergens = {self.allergens}, categories = {self.categories}, dietary_tags = {self.dietary_tags}, description = {self.description})"
+
+class RecipeImage(db.Model):
+    """Models the image feature of recipe posts"""
+    id = db.Column(db.Integer, primary_key = True)
+    recipe_id = db.Column(db.Integer, nullable = False)
+    image_path = db.Column(db.String(100), nullable = False)
+
 
 recipe_args = reqparse.RequestParser()
 recipe_args.add_argument("recipe_name", type = str, required = True, help = "Recipe name cannot be blank")
@@ -30,6 +44,12 @@ recipe_args.add_argument("description", type = str, required = False)
 recipe_args.add_argument("author_id", type = int, required = True, help = "Author ID cannot be blank")
 recipe_args.add_argument("author_username", type = str, required = True, help = "Author username cannot be blank")
 
+imageFields = {
+    "id": fields.Integer,
+    "recipe_id": fields.Integer,
+    "image_path": fields.String
+}
+
 recipeFields = {
     "id": fields.Integer,
     "recipe_name": fields.String,
@@ -40,7 +60,8 @@ recipeFields = {
     "dietary_tags": fields.Raw,
     "description": fields.String,
     "author_id": fields.Integer,
-    "author_username": fields.String
+    "author_username": fields.String,
+    "images": fields.List(fields.Nested(imageFields))
 }
 
 class Recipes(Resource):
@@ -59,6 +80,17 @@ class Recipes(Resource):
         db.session.add(recipe)
         db.session.commit()
         return recipe, 201
+
+    @marshal_with(imageFields)
+    def post_imgs(self):
+        data = request.get_json()
+        if not data:
+            return
+        images = RecipeImage(data)
+        db.session.add(images)
+        db.session.commit()
+        return images, 201
+
 
 class Recipe(Resource):
     @marshal_with(recipeFields)

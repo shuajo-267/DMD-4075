@@ -7,7 +7,10 @@ from extensions import db
 from recipe import Recipe, Recipes
 
 app = Flask(__name__)
-CORS(app, resources = {r"/api/recipes": {"origins": "http://localhost:5173"}})
+CORS(app, resources = {
+    r"/api/recipes": {"origins": "http://localhost:5173"},
+    r"/api/recipes/[0-9]+": {"origins": "http://localhost:5173"}
+})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 api = Api(app)
 db.init_app(app)
