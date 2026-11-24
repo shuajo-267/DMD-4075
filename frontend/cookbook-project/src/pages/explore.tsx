@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
+import RecipePost from "../components/recipe-post";
 
 interface Ingredient {
   id: number;
@@ -75,7 +76,7 @@ function ExplorePage() {
               return (
                 <div>
                   <ul>
-                    <li key={post.id}>{post.recipe_name}</li>
+                    <li key={post.id}><RecipePost postId={post.id}/></li>
                   </ul>
                 </div>
               );
